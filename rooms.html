@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Sigmar&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Rooms</h1>
+    </header>
+    <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./rooms.html">Rooms</a></li>
+          <li><a href="./about.html">about</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="main-content">
+            <h2>What is your Room?</h2>
+            <p>Please add a room :  </p>
+            <form id="addRoomForm">
+                <label for="roomName">Room Name:</label>
+                <input type="text" id="roomName" name="roomName"><br><br>
+                <label for="roomDescription">Room Description:</label>
+                <textarea id="roomDescription" name="roomDescription"></textarea><br><br>
+                <label for="roomSize">Room Size (sq. ft.):</label>
+                <input type="number" id="roomSize" name="roomSize"><br><br>
+                <input type="submit" value="Add Room">
+              </form>
+        </section>
+        <aside class="sidebar">
+            <h2>Sidebar</h2>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <script>
+        const form = document.getElementById('addRoomForm');
+    
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+    
+          const roomName = document.getElementById('roomName').value;
+          const roomDescription = document.getElementById('roomDescription').value;
+          const roomSize = document.getElementById('roomSize').value;
+    
+          const roomData = {
+            name: roomName,
+            description: roomDescription,
+            size: roomSize
+          };
+    
+          const homeData = localStorage.getItem('home');
+          if (homeData === null) {
+            localStorage.setItem('home', JSON.stringify([roomData]));
+          } else {
+            const homeArray = JSON.parse(homeData);
+            homeArray.push(roomData);
+            localStorage.setItem('home', JSON.stringify(homeArray));
+          }
+    
+          console.log('Room added successfully!');
+        });
+      </script>
+</body>
+</html>
