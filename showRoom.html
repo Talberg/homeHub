@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Sigmar&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body >
+    <header>
+        <h1>Rooms</h1>
+        <img src="Room.png" width="200">
+    </header>
+    <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./rooms.html">Rooms</a></li>
+          <li><a href="./about.html">about</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="main-content">
+            <h2>What is your Room?</h2>
+            <table id="matchedDataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="matchedDataTableBody">
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+    <script>
+        const form = document.getElementById('addRoomForm');
+    
+      
+      
+
+
+
+
+
+
+
+
+
+
+// Example data to store
+let exampleData = [
+    { id: 1, name: 'Google', value: 'https://www.google.com' },
+    { id: 2, name: 'Bing', value: 'https://www.bing.com' },
+    { id: 3, name: 'DuckDuckGo', value: 'https://duckduckgo.com' }
+];
+
+// Store the data in local storage
+localStorage.setItem('data', JSON.stringify(exampleData));
+
+// Call the function to create the link list
+
+function getParameterByName(name) {
+    let url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+// Function to get query parameter from URL
+function getParameterByName(name) {
+    let url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+// Function to display matched data
+function displayMatchedData() {
+    // Get the name parameter from URL
+    let name = getParameterByName('name');
+
+    // Check if name parameter exists
+    if (name) {
+        // Get data from local storage
+        let storedData = localStorage.getItem('data');
+
+        // Check if data exists
+        if (storedData) {
+            // Parse the data
+            let data = JSON.parse(storedData);
+
+            // Filter the data based on the name
+            let matchedData = data.filter(item => item.name.toLowerCase().includes(name.toLowerCase()));
+
+            // Get the matched data table body
+            let matchedDataTableBody = document.getElementById('matchedDataTableBody');
+
+            // Clear any existing rows
+            matchedDataTableBody.innerHTML = '';
+
+            // Check if matched data exists
+            if (matchedData.length > 0) {
+                // Display the matched data
+                matchedData.forEach(item => {
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.value}</td>
+                    `;
+                    matchedDataTableBody.appendChild(row);
+                });
+            } else {
+                let row = document.createElement('tr');
+                row.innerHTML = `<td colspan="3">No data found matching the name.</td>`;
+                matchedDataTableBody.appendChild(row);
+            }
+        } else {
+            console.log('No data found in local storage.');
+        }
+    } else {
+        console.log('Name parameter not found in URL.');
+    }
+}
+
+
+// Store the data in local storage
+localStorage.setItem('data', JSON.stringify(exampleData));
+
+// Call the function to display matched data
+displayMatchedData();
+
+      </script>
+</body>
+</html>

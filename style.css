@@ -2,12 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-color: #C4A29E;
 }
 
 header {
-  background-color: #333;
-  color: #fff;
+  background-color: #002A32;
+  color: #FFC6AC;
   padding: 1em;
   text-align: center;
   border-bottom: 5px solid #555;
@@ -19,7 +19,7 @@ nav ul {
   padding: 0;
   display: flex;
   justify-content: space-between;
-  background-color: #444;
+  background-color: #002A32;
   padding: 0.5em;
 }
 
@@ -41,18 +41,85 @@ main {
 
 .main-content {
   grid-column: 1;
-  background-color: #fff;
+  background-color: #FFC6AC;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #002A32;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar {
   grid-column: 2;
-  background-color: #fff;
+  background-color: #FFC6AC;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #002A32;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.table {
+  grid-column: 1;
+  background-color: #FFC6AC;
+  padding: 20px;
+  border: 1px solid #002A32;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#dataTable th, #dataTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+#dataTable th {
+  background-color: #002A32;
+  color: white;
+  font-weight: bold;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#dataTable td {
+  background-color: #fff;
+}
+
+#dataTable tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+#dataTable tr:hover td {
+  background-color: #ddd;
+}
+\#matchedDataTable {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+#matchedDataTable th {
+  background-color: #002A32;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #002A32;
+}
+
+#matchedDataTable td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#matchedDataTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#matchedDataTable tr:hover {
+  background-color: #ddd;
 }
 
 h2 {
@@ -78,5 +145,10 @@ label {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
+
+}
+a {
+
+  color: #F40076;
 
 }

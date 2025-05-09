@@ -12,9 +12,10 @@
     />
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body >
     <header>
         <h1>Rooms</h1>
+        <img src="Room.png" width="200">
     </header>
     <nav>
         <ul>
@@ -39,12 +40,23 @@
         </section>
         <aside class="sidebar">
             <h2>Sidebar</h2>
-            <ul>
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Link 2</a></li>
-                <li><a href="#">Link 3</a></li>
-            </ul>
+            <ul id="linkList"></ul>
+
         </aside>
+        <aside onload="displayData() " class="table">
+          <h2>Rooms <button id="clearStorageButton">Clear Rooms</button></h2>
+          <table  id="dataTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+      </aside>
     </main>
 
     <script>
@@ -63,17 +75,103 @@
             size: roomSize
           };
     
-          const homeData = localStorage.getItem('home');
+          const homeData = localStorage.getItem('data');
           if (homeData === null) {
-            localStorage.setItem('home', JSON.stringify([roomData]));
+            localStorage.setItem('data', JSON.stringify([roomData]));
           } else {
             const homeArray = JSON.parse(homeData);
             homeArray.push(roomData);
-            localStorage.setItem('home', JSON.stringify(homeArray));
+            localStorage.setItem('data', JSON.stringify(homeArray));
           }
-    
+          displayData()
           console.log('Room added successfully!');
+
+
         });
+        function displayData() {
+
+let storedData = localStorage.getItem('data');
+
+if (storedData) {
+
+    let data = JSON.parse(storedData);
+
+
+    let tableBody = document.getElementById('tableBody');
+
+
+    tableBody.innerHTML = '';
+
+
+    data.forEach((item, index) => {
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.description}</td>
+            <td>${item.size}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+} else {
+    console.log('No data found in local storage.');
+}
+}
+
+displayData();
+
+function clearStorage() {
+    localStorage.clear();
+    console.log('Local storage cleared.');
+
+    document.getElementById('tableBody').innerHTML = '';
+}
+
+
+document.getElementById("clearStorageButton").addEventListener("click", clearStorage);
+
+
+function createLinkList() {
+
+    let storedData = localStorage.getItem('data');
+
+
+    if (storedData) {
+        // Parse the data
+        let data = JSON.parse(storedData);
+
+        // Get the link list element
+        let linkList = document.getElementById('linkList');
+
+        // Clear any existing links
+        linkList.innerHTML = '';
+
+        // Loop through the data and create list items with links
+        data.forEach((item, index) => {
+            let link = document.createElement('a');
+            link.href = `./showRoom.html?name=${item.name.toLowerCase().replace(/\s+/g, '-')}`;
+            link.textContent = item.name;
+
+            let listItem = document.createElement('li');
+            listItem.appendChild(link);
+            linkList.appendChild(listItem);
+        });
+    } else {
+        console.log('No data found in local storage.');
+    }
+}
+
+// Example data to store
+let exampleData = [
+    { id: 1, name: 'Google', value: 'https://www.google.com' },
+    { id: 2, name: 'Bing', value: 'https://www.bing.com' },
+    { id: 3, name: 'DuckDuckGo', value: 'https://duckduckgo.com' }
+];
+
+// Store the data in local storage
+localStorage.setItem('data', JSON.stringify(exampleData));
+
+// Call the function to create the link list
+createLinkList();
       </script>
 </body>
 </html>
