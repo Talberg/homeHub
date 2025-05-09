@@ -152,3 +152,38 @@ a {
   color: #F40076;
 
 }
+
+/* Tablet layout (max-width: 768px) */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  .main-content, .sidebar, .table {
+    grid-column: 1;
+  }
+  .sidebar {
+    margin-top: 20px;
+  }
+}
+
+/* Mobile layout (max-width: 480px) */
+@media (max-width: 480px) {
+  header {
+    padding: 0.5em;
+  }
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+  nav li {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  #dataTable, #matchedDataTable {
+    font-size: 14px;
+  }
+  .main-content, .sidebar, .table {
+    padding: 10px;
+  }
+}

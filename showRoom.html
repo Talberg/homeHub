@@ -14,14 +14,14 @@
 </head>
 <body >
     <header>
-        <h1>Rooms</h1>
+        <h1>Contents</h1>
         <img src="Room.png" width="200">
     </header>
     <nav>
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a href="./rooms.html">Rooms</a></li>
-          <li><a href="./about.html">about</a></li>
+          <li><a href="./about.html">About</a></li>
         </ul>
     </nav>
     <main>
@@ -30,9 +30,7 @@
             <table id="matchedDataTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Value</th>
+                        <th>Contents</th>
                     </tr>
                 </thead>
                 <tbody id="matchedDataTableBody">
@@ -58,17 +56,10 @@
 
 
 
-// Example data to store
-let exampleData = [
-    { id: 1, name: 'Google', value: 'https://www.google.com' },
-    { id: 2, name: 'Bing', value: 'https://www.bing.com' },
-    { id: 3, name: 'DuckDuckGo', value: 'https://duckduckgo.com' }
-];
 
-// Store the data in local storage
-localStorage.setItem('data', JSON.stringify(exampleData));
 
-// Call the function to create the link list
+
+
 
 function getParameterByName(name) {
     let url = window.location.href;
@@ -90,39 +81,37 @@ function getParameterByName(name) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-// Function to display matched data
+
 function displayMatchedData() {
-    // Get the name parameter from URL
+
     let name = getParameterByName('name');
 
-    // Check if name parameter exists
+
     if (name) {
-        // Get data from local storage
+    
         let storedData = localStorage.getItem('data');
 
-        // Check if data exists
+  
         if (storedData) {
-            // Parse the data
+
             let data = JSON.parse(storedData);
 
-            // Filter the data based on the name
+      
             let matchedData = data.filter(item => item.name.toLowerCase().includes(name.toLowerCase()));
 
-            // Get the matched data table body
+
             let matchedDataTableBody = document.getElementById('matchedDataTableBody');
 
-            // Clear any existing rows
+   
             matchedDataTableBody.innerHTML = '';
 
-            // Check if matched data exists
+         
             if (matchedData.length > 0) {
-                // Display the matched data
+           
                 matchedData.forEach(item => {
                     let row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${item.id}</td>
-                        <td>${item.name}</td>
-                        <td>${item.value}</td>
+                        <td>${item.description}</td>
                     `;
                     matchedDataTableBody.appendChild(row);
                 });
@@ -140,10 +129,10 @@ function displayMatchedData() {
 }
 
 
-// Store the data in local storage
-localStorage.setItem('data', JSON.stringify(exampleData));
 
-// Call the function to display matched data
+
+
+
 displayMatchedData();
 
       </script>

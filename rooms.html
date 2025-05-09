@@ -21,7 +21,7 @@
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a href="./rooms.html">Rooms</a></li>
-          <li><a href="./about.html">about</a></li>
+          <li><a href="./about.html">About</a></li>
         </ul>
     </nav>
     <main>
@@ -31,7 +31,7 @@
             <form id="addRoomForm">
                 <label for="roomName">Room Name:</label>
                 <input type="text" id="roomName" name="roomName"><br><br>
-                <label for="roomDescription">Room Description:</label>
+                <label for="roomDescription">Room Contents:</label>
                 <textarea id="roomDescription" name="roomDescription"></textarea><br><br>
                 <label for="roomSize">Room Size (sq. ft.):</label>
                 <input type="number" id="roomSize" name="roomSize"><br><br>
@@ -39,7 +39,7 @@
               </form>
         </section>
         <aside class="sidebar">
-            <h2>Sidebar</h2>
+            <h2>Go to Room</h2>
             <ul id="linkList"></ul>
 
         </aside>
@@ -48,9 +48,8 @@
           <table  id="dataTable">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
-                    <th>Value</th>
+                    <th>Size</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -84,6 +83,7 @@
             localStorage.setItem('data', JSON.stringify(homeArray));
           }
           displayData()
+          createLinkList();
           console.log('Room added successfully!');
 
 
@@ -107,7 +107,6 @@ if (storedData) {
         let row = document.createElement('tr');
         row.innerHTML = `
             <td>${item.name}</td>
-            <td>${item.description}</td>
             <td>${item.size}</td>
         `;
         tableBody.appendChild(row);
@@ -160,15 +159,7 @@ function createLinkList() {
     }
 }
 
-// Example data to store
-let exampleData = [
-    { id: 1, name: 'Google', value: 'https://www.google.com' },
-    { id: 2, name: 'Bing', value: 'https://www.bing.com' },
-    { id: 3, name: 'DuckDuckGo', value: 'https://duckduckgo.com' }
-];
 
-// Store the data in local storage
-localStorage.setItem('data', JSON.stringify(exampleData));
 
 // Call the function to create the link list
 createLinkList();
